@@ -23,14 +23,7 @@ const productoD = new Producto("WOS", 10000, 4)
 
 let listaProductos = [productoA, productoB, productoC, productoD]
 
-let nombresProductos = []
-
-function listarProductos(){
-    for(const producto of listaProductos){
-        nombresProductos.push(producto.nombre)
-    }
-}
-listarProductos()
+let nombresProductos = listaProductos.map((producto) => producto.nombre)
 
 let cantidadProductos = prompt( "Ingrese la cantidad de artistas que desea ver: \n \n" + nombresProductos.join("\n")).toLowerCase()
 let precioTotal = 0;
@@ -76,3 +69,4 @@ else(cantidadProductos > 1)
 }
 
 alert("Gracias por tu compra, que disfrutes el show!")
+
