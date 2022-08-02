@@ -54,6 +54,11 @@ header{
 body{
     min-height: 100vh;
     background-color: #000000;
+    color: white;
+}
+
+#lista{
+    color: white;
 }
 
 nav ul{
@@ -139,19 +144,19 @@ nav ul li:hover{
     margin-right: auto;
     margin-left: 250px;
     padding-bottom: 40px; }
-    #formato .cortos .movie {
+    #formato .cortos .artista {
       background-color: white;
       width: 340px;
       margin-left: 20px;
       margin-bottom: 18px;
       display: flex;
       flex-direction: column; }
-      #formato .cortos .movie img {
+      #formato .cortos .artista img {
         width: 320px;
         height: auto;
         margin-left: 10px;
         margin-top: 10px; }
-      #formato .cortos .movie .videoT {
+      #formato .cortos .artista .videoT {
         display: flex;
         flex-direction: column;
         align-content: center;
@@ -161,7 +166,7 @@ nav ul li:hover{
         margin-top: 5px;
         margin-right: auto;
         margin-left: auto; }
-      #formato .cortos .movie #botones {
+      #formato .cortos .artista #botones {
         display: flex;
         background-color: black;
         padding: 10px;
@@ -177,7 +182,7 @@ nav ul li:hover{
         margin-left: auto;
         margin-bottom: 5px;
         font-weight: bold; }
-      #formato .cortos .movie p {
+      #formato .cortos .artista p {
         text-align: justify;
         padding: 10px;
         color: black;
@@ -185,12 +190,12 @@ nav ul li:hover{
         float: left;
         font-size: 20px;
         font-weight: bold; }
-      #formato .cortos .movie h2 {
+      #formato .cortos .artista h2 {
         color: white;
         text-align: center;
         background-color: rgb(75, 68, 68);
         padding: 9px; }
-      #formato .cortos .movie h3 {
+      #formato .cortos .artista h3 {
         font-size: 25px;
         color: white;
         text-align: center;

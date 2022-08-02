@@ -9,7 +9,6 @@ else{
     alert(nombre + " no tenes la edad suficiente para ver el contenido")
 }
 
-
 function Producto(nombre, precio, stock){
     this.nombre = nombre
     this.precio = precio
@@ -22,6 +21,18 @@ const productoC = new Producto("Duki", 9000, 4)
 const productoD = new Producto("WOS", 10000, 4)
 
 let listaProductos = [productoA, productoB, productoC, productoD]
+
+for(const producto of listaProductos){
+
+    let card = document.createElement("div")
+    
+    card.innerHTML= `<h3>${producto.nombre}</h3>
+                     <p>$ ${producto.precio}</p>
+                     <p> Unidades restantes: ${producto.stock}</p>`
+                     
+    document.body.append(card)
+}
+
 
 let nombresProductos = listaProductos.map((producto) => producto.nombre)
 
@@ -38,7 +49,7 @@ function calculoStock(cantidad, producto){
         alert("El precio es de: $ " + (cantidad * producto.precio))
         }
         else{
-            alert("No disponemos de la cantidad deseada de entradas, el stock actual es de: " + stock + " unidades")
+            alert(`No disponemos de la cantidad deseada de entradas, el stock actual es de: ${producto.stock} unidades`)
         }
 }
 
@@ -69,4 +80,5 @@ else(cantidadProductos > 1)
 }
 
 alert("Gracias por tu compra, que disfrutes el show!")
+
 
