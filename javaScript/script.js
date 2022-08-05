@@ -1,84 +1,176 @@
-let nombre = prompt("Ingrese su nombre aquí:")
-let edad = parseInt(prompt("Ingrese su edad"))
+document.addEventListener('DOMContentLoaded', () => {
 
+    let carrito = [];
+    const DOMitems = document.getElementById('items');
+    const DOMcarrito = document.querySelector('#carrito');
+    const DOMtotal = document.querySelector('#total');
+    const DOMbotonVaciar = document.querySelector('#boton-vaciar');
 
-if(edad >= 18){
-    alert("Bienvenido " + nombre + ", comencemos con la compra!")
-}
-else{
-    alert(nombre + " no tenes la edad suficiente para ver el contenido")
-}
+    const listaDeProductos = [
+        {
+            id: 1,
+            nombre: "Dua Lipa",
+            precio: 1000,
+            stock: 10
+        },
+        {
+            id: 2,
+            nombre: "Christina Aguilera",
+            precio: 1200,
+            stock: 10
+        },
+        {
+            id: 3,
+            nombre: "Duki",
+            precio: 8210,
+            stock: 10,
+        },
+        {
+            id: 4,
+            nombre: "Wos",
+            precio: 6800,
+            stock: 10
+        }
+    ]
 
-function Producto(nombre, precio, stock){
-    this.nombre = nombre
-    this.precio = precio
-    this.stock = stock
-}
-
-const productoA = new Producto("Dua Lipa", 14000, 4)
-const productoB = new Producto("Christina Aguilera", 19000, 4)
-const productoC = new Producto("Duki", 9000, 4)
-const productoD = new Producto("WOS", 10000, 4)
-
-let listaProductos = [productoA, productoB, productoC, productoD]
-
-for(const producto of listaProductos){
-
-    let card = document.createElement("div")
     
-    card.innerHTML= `<h3>${producto.nombre}</h3>
-                     <p>$ ${producto.precio}</p>
-                     <p> Unidades restantes: ${producto.stock}</p>`
-                     
-    document.body.append(card)
-}
+    function renderizarProductos() {
+        listaDeProductos.forEach((info) => {
 
+            const miNodo = document.createElement('div');
+            miNodo.classList.add('card', 'col-sm-4');
 
-let nombresProductos = listaProductos.map((producto) => producto.nombre)
+            const miNodoCardBody = document.createElement('div');
+            miNodoCardBody.classList.add('card-body');
 
-let cantidadProductos = prompt( "Ingrese la cantidad de artistas que desea ver: \n \n" + nombresProductos.join("\n")).toLowerCase()
-let precioTotal = 0;
+            const miNodoTitle = document.createElement('h5');
+            miNodoTitle.classList.add('card-title');
+            miNodoTitle.innerText = info.nombre;
 
-function calculoPrecio(cantidad, precio){
-    precioTotal += cantidad * precio
-}
+            const miNodoPrecio = document.createElement('p');
+            miNodoPrecio.classList.add('card-text');
+            miNodoPrecio.innerText = `$${info.precio}`;
 
-function calculoStock(cantidad, producto){
-    if(producto.stock >= cantidad){
-        calculoPrecio(cantidad, producto.precio)
-        alert("El precio es de: $ " + (cantidad * producto.precio))
+            const miNodoStock = document.createElement('p');
+            miNodoStock.classList.add('card-text');
+            miNodoStock.innerText = `Stock: ${info.stock}`;
+
+            const miNodoBoton = document.createElement('button');
+            miNodoBoton.classList.add('btn', 'btn-primary');
+            miNodoBoton.innerText = 'COMPRAR';
+            miNodoBoton.setAttribute('marcador', info.id);
+            miNodoBoton.addEventListener('click', anyadirProductoAlCarrito);
+
+            miNodoCardBody.append(miNodoTitle);
+            miNodoCardBody.append(miNodoPrecio);
+            miNodoCardBody.append(miNodoStock);
+
+            miNodoCardBody.append(miNodoBoton);
+            miNodo.append(miNodoCardBody);
+            DOMitems.append(miNodo);
+        });
+    }
+
+    function anyadirProductoAlCarrito(e) {
+
+        carrito.push(e.target.getAttribute('marcador'))
+
+        renderizarCarrito();
+
+        guardarCarritoEnLocalStorage();
+    }
+
+    function renderizarCarrito() {
+
+        DOMcarrito.innerText = '';
+
+        const carritoSinDuplicados = [...new Set(carrito)];
+
+        carritoSinDuplicados.forEach((item) => {
+
+            const miItem = listaDeProductos.filter((itemBaseDatos) => {
+
+                return itemBaseDatos.id === parseInt(item);
+            });
+
+            const numeroUnidadesItem = carrito.reduce((total, itemId) => {
+
+                return itemId === item ? total += 1 : total;
+            }, 0);
+
+            const miNodo = document.createElement('li');
+            miNodo.classList.add('list-group-item', 'text-right', 'mx-2');
+            miNodo.innerText = `${numeroUnidadesItem} x ${miItem[0].nombre} - $${miItem[0].precio}`;
+
+            const miBoton = document.createElement('button');
+            miBoton.classList.add('btn', 'btn-danger', 'mx-5');
+            miBoton.innerText = 'X';
+            miBoton.style.marginLeft = '1rem';
+            miBoton.dataset.item = item;
+            miBoton.addEventListener('click', borrarItemCarrito);
+
+            miNodo.appendChild(miBoton);
+            DOMcarrito.appendChild(miNodo);
+        });
+
+        DOMtotal.innerText = calcularTotal();
+    }
+
+    function borrarItemCarrito(e) {
+
+        const id = e.target.dataset.item;
+
+        carrito = carrito.filter((carritoId) => {
+            return carritoId !== id;
+        });
+
+        renderizarCarrito();
+
+        guardarCarritoEnLocalStorage();
+
+    }
+
+    function calcularTotal() {
+
+        return carrito.reduce((total, item) => {
+
+            const miItem = listaDeProductos.filter((itemBaseDatos) => {
+                return itemBaseDatos.id === parseInt(item);
+            });
+
+            return total + miItem[0].precio;
+        }, 0).toFixed(2);
+    }
+
+ 
+    
+    function vaciarCarrito() {
+
+        carrito = [];
+
+        renderizarCarrito();
+
+        localStorage.removeItem('carrito');
+
+    }
+
+    function guardarCarritoEnLocalStorage () {
+        localStorage.setItem('carrito', JSON.stringify(carrito));
+    }
+
+    function cargarCarritoDeLocalStorage () {
+
+        if (localStorage.getItem('carrito') !== null) {
+
+            carrito = JSON.parse(localStorage.getItem('carrito'));
         }
-        else{
-            alert(`No disponemos de la cantidad deseada de entradas, el stock actual es de: ${producto.stock} unidades`)
-        }
-}
+    }
 
 
-for(let i = 0; i < cantidadProductos; i++){
-
-let compra1 = prompt("Ingrese el nombre del artista que desea ver: \n \n" + nombresProductos.join("\n")).toLowerCase()
-let cantidad1 = parseInt(prompt("Ingrese la cantidad de entradas que desea:"))
-
-if(compra1 == productoA.nombre .toLowerCase()){
-    calculoStock(cantidad1, productoA)
-}
-
-else if(compra1 == productoB.nombre .toLowerCase()){
-    calculoStock(cantidad1, productoB)
-}
-
-else if(compra1 == productoC.nombre .toLowerCase()){
-    calculoStock(cantidad1, productoC)
-}
-
-else if(compra1 == productoD.nombre .toLowerCase()){
-    calculoStock(cantidad1, productoD)
-}
-
-else(cantidadProductos > 1)
-    alert("Precio final de tu compra: " + precioTotal)
-}
-
-alert("Gracias por tu compra, que disfrutes el show!")
+    DOMbotonVaciar.addEventListener('click', vaciarCarrito);
 
 
+    cargarCarritoDeLocalStorage();
+    renderizarProductos();
+    renderizarCarrito();
+});
