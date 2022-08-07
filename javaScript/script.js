@@ -10,26 +10,30 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             id: 1,
             nombre: "Dua Lipa",
-            precio: 1000,
-            stock: 10
+            precio: 10000,
+            stock: 10,
+            img: './img/33BJTAXAFFP5HEBATEFA3MITRM.jpg'
         },
         {
             id: 2,
             nombre: "Christina Aguilera",
-            precio: 1200,
-            stock: 10
+            precio: 12000,
+            stock: 10,
+            img: './img/Christina-Aguilera-22La-Fuerza22.jpg'
         },
         {
             id: 3,
             nombre: "Duki",
             precio: 8210,
             stock: 10,
+            img: './img/Duki.jpg'
         },
         {
             id: 4,
             nombre: "Wos",
             precio: 6800,
-            stock: 10
+            stock: 10,
+            img: './img/Wos.jpg'
         }
     ]
 
@@ -47,6 +51,9 @@ document.addEventListener('DOMContentLoaded', () => {
             miNodoTitle.classList.add('card-title');
             miNodoTitle.innerText = info.nombre;
 
+            const miNodoImg = document.createElement('img');
+            miNodoImg.setAttribute('src', info.img)
+
             const miNodoPrecio = document.createElement('p');
             miNodoPrecio.classList.add('card-text');
             miNodoPrecio.innerText = `$${info.precio}`;
@@ -54,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const miNodoStock = document.createElement('p');
             miNodoStock.classList.add('card-text');
             miNodoStock.innerText = `Stock: ${info.stock}`;
-
+            
             const miNodoBoton = document.createElement('button');
             miNodoBoton.classList.add('btn', 'btn-primary');
             miNodoBoton.innerText = 'COMPRAR';
@@ -62,6 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
             miNodoBoton.addEventListener('click', anyadirProductoAlCarrito);
 
             miNodoCardBody.append(miNodoTitle);
+            miNodoCardBody.append(miNodoImg);
             miNodoCardBody.append(miNodoPrecio);
             miNodoCardBody.append(miNodoStock);
 
@@ -104,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const miBoton = document.createElement('button');
             miBoton.classList.add('btn', 'btn-danger', 'mx-5');
-            miBoton.innerText = 'X';
+            miBoton.innerText = 'Borrar';
             miBoton.style.marginLeft = '1rem';
             miBoton.dataset.item = item;
             miBoton.addEventListener('click', borrarItemCarrito);

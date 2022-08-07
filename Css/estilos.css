@@ -218,7 +218,6 @@ nav ul li:hover{
     .pcartelera{
         padding-top: 20px;
         padding-bottom: 15px;
-        background-color: #a00000;
         font-size: 35px;
         font-weight: bold;
         color: white;
@@ -243,22 +242,20 @@ main{
     flex-direction:row;
     margin-top: 30px;
     margin-bottom: 30px;
-    padding: 10px;
     font-family: 'Montserrat', sans-serif;
+    margin-left: 350px;
     margin-right: auto;
-    margin-left: 250px;
-    padding-bottom: 40px;
 }
 
 .btn{
         padding: 10px;
         text-transform: uppercase;
-        font-size: 15px;
+        font-size: 10px;
         list-style: none;
         margin: auto;
         text-decoration: none;
-        color: rgb(245, 63, 63);
-        width: 105px;
+        color: rgb(0, 0, 0);
+        width: 90px;
         height: auto;
         margin-right: auto;
         margin-left: auto;
@@ -268,28 +265,31 @@ main{
 
 }
 
+.carritoE{
+    width: 350px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
 .card-body{
     background-color: rgb(148, 145, 145);
     color: rgb(255, 255, 255);
     text-transform: uppercase;
     font-family: 'Montserrat', sans-serif, Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    font-size: 0px;
-    width: 250px;
+    width: 280px;
     display: flex;
     flex-direction:column;
     margin-top: 30px;
     margin-bottom: 30px;
     padding: 10px;
-    margin-right: auto;
-    margin-left: 55px;
     padding-bottom: 40px;
     list-style: none;
-
+    margin: 10px;
 }
 
 #cuerpoCard{
     background-color: #a00000;
-    width: 550px;
+    width: auto;
     margin-left: auto;
     margin-right: auto;
 }
@@ -305,7 +305,7 @@ h5{
     background-color: #c00a0a;
     text-transform: uppercase;
     font-family: 'Montserrat', sans-serif, Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    font-size: 25px;
+    font-size: 20px;
 }
 
 aside{
@@ -314,25 +314,27 @@ aside{
 
 .card-text{
     font-family: 'Montserrat', sans-serif, Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    font-size: 20px;
+    font-size: 1px;
     text-align: center;
     margin-top: 15px;    
 }
 
 #carrito{
-    background-color: rgb(136, 136, 136);
+    background-color: rgb(112, 112, 112);
     color:#000000;
     list-style: none;
+    width: auto;
 }
 
 .text-right{
-    color: #000000;
+    color: #ffffff;
     text-transform: uppercase;
     font-family: 'Montserrat', sans-serif, Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-size: 25px;
-    width: 250px;
+    width: auto;
     margin-left: auto;
     margin-right: auto;
+    padding: 10px;
 }
 
 #boton-vaciar{
@@ -342,12 +344,15 @@ aside{
 }
 
 .tituloCarrito{
+    text-align: center;
     text-transform: uppercase;
     font-family: 'Montserrat', sans-serif, Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-size: 45px;
-    width: 250px;
+    width: auto;
     margin-left: auto;
     margin-right: auto;
+    padding: 10px;
+    background-color: #a00000;
 }
 
 .card-text{
@@ -355,12 +360,21 @@ aside{
     font-family: 'Montserrat', sans-serif, Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-size: 20px;
     list-style: none;
-
 }
 
 .calculartotal{
     color: white;
 }
+
+#total{
+    color: white;
+}
+
+.list-group{
+    padding: 15px;
+}
+
+
 /* FOOTER */
 
 footer{
