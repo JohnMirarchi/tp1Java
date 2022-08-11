@@ -82,9 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function anyadirProductoAlCarrito(e) {
 
         carrito.push(e.target.getAttribute('marcador'))
-
         renderizarCarrito();
-
         guardarCarritoEnLocalStorage();
     }
 
@@ -169,10 +167,10 @@ document.addEventListener('DOMContentLoaded', () => {
     function cargarCarritoDeLocalStorage () {
 
         if (localStorage.getItem('carrito') !== null) {
-
             carrito = JSON.parse(localStorage.getItem('carrito'));
         }
     }
+
 
 
     DOMbotonVaciar.addEventListener('click', vaciarCarrito);
