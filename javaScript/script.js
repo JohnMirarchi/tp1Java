@@ -211,9 +211,6 @@ document.addEventListener('DOMContentLoaded', () => {
     cargarCarritoDeLocalStorage();
     renderizarProductos();
     renderizarCarrito();
-
-    
-
  
 
     Swal.fire({

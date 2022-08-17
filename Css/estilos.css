@@ -267,3 +267,7 @@ footer div nav ul li a{
     font-family: 'Montserrat', sans-serif, Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     text-transform: uppercase;
 }
+
+.banner{
+    margin-top: 40px;
+}
