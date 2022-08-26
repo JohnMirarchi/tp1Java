@@ -1,0 +1,30 @@
+[
+    {
+        "id": 1,
+        "nombre": "Dua Lipa",
+        "precio": 15000,
+        "stock": 10,
+        "img": "../img/33BJTAXAFFP5HEBATEFA3MITRM.jpg"
+    },
+    {
+        "id": 2,
+        "nombre": "Christina Aguilera",
+        "precio": 20000,
+        "stock": 10,
+        "img": "../img/Christina-Aguilera-22La-Fuerza22.jpg"
+    },
+    {
+        "id": 3,
+        "nombre": "Duki",
+        "precio": 8000,
+        "stock": 10,
+        "img": "../img/Duki.jpg"
+    },
+    {
+        "id": 4,
+        "nombre": "Wos",
+        "precio": 8500,
+        "stock": 10,
+        "img": "../img/Wos.jpg"
+    }
+]

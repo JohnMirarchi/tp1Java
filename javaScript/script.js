@@ -1,48 +1,21 @@
 document.addEventListener('DOMContentLoaded', () => { 
 
-
+ 
     let carrito = [];
     const items = document.getElementById('items');
     const carritoLiteral = document.getElementById('carrito');
     const precioFinal = document.getElementById('total');
     const botonVaciar = document.getElementById('boton-vaciar');
     const botonPedir = document.getElementById("boton-comprar");
+    
 
-    const listaDeProductos = [{
-            id: 1,
-            nombre: "Dua Lipa",
-            precio: 15000,
-            stock: 10,
-            img: "../img/33BJTAXAFFP5HEBATEFA3MITRM.jpg",
-        },
-        {
-            id: 2,
-            nombre: "Christina Aguilera",
-            precio: 20000,
-            stock: 10,
-            img: "../img/Christina-Aguilera-22La-Fuerza22.jpg"
-        },
-        {
-            id: 3,
-            nombre: "Duki",
-            precio: 8000,
-            stock: 10,
-            img: "../img/Duki.jpg"
-        },
-        {
-            id: 4,
-            nombre: "Wos",
-            precio: 8500,
-            stock: 10,
-            img: "../img/Wos.jpg"
-        },
-
-    ]
+    fetch('./data.json')
+        .then((response) => response.json()) 
+        .then(data=>renderizarProductos(data))
 
 
-
-    function renderizarProductos() { 
-        listaDeProductos.forEach((info) => {
+    function renderizarProductos(data) { 
+        data.forEach((info) => {
 
             const miNodo = document.createElement('div');
             miNodo.classList.add("card", "text-center", 'col-sm-4', "bg-bold");
@@ -71,10 +44,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const miNodoBoton = document.createElement('button');
             miNodoBoton.classList.add('btn', 'btn-outline-info');
             miNodoBoton.innerText = 'Comprar';
-            miNodoBoton.setAttribute('marcador', info.id); //con esto identifico a marcador con el id de cada prod
+            miNodoBoton.setAttribute('marcador', info.id); 
             miNodoBoton.addEventListener('click', agregarProductoAlCarrito);
-            miNodoBoton.addEventListener("click", alerta); //Sweet alert
-
+            miNodoBoton.addEventListener("click", alerta);
              
             miNodoCardBody.append(miNodoTitle);
             miNodoCardBody.append(miNodoImg);
@@ -89,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function agregarProductoAlCarrito(e) {
         
-        carrito.push(e.target.getAttribute('marcador'))
+        carrito.push(e.target.getElementById('marcador'))
          
         renderizarCarrito();
         guardarCarritoEnLocalStorage();
@@ -115,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
          
         carritoSinDuplicados.forEach((item) => {
              
-            const miItem = listaDeProductos.filter((itemBaseDatos) => {
+            const miItem = data.filter((itemBaseDatos) => {
                  
                 return itemBaseDatos.id === parseInt(item);
             });
@@ -163,7 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function calcularTotal() {
         
         return carrito.reduce((total, item) => {
-            const miItem = listaDeProductos.filter((itemBaseDatos) => {
+            const miItem = data.json.filter((itemBaseDatos) => {
                 return itemBaseDatos.id === parseInt(item);
             });
             return total + miItem[0].precio;
@@ -212,13 +184,4 @@ document.addEventListener('DOMContentLoaded', () => {
     renderizarProductos();
     renderizarCarrito();
  
-
-    Swal.fire({
-        title: '<strong>Bienvenidos a Nuestra Tienda Online</strong>',
-        showCloseButton: true,
-        showCancelButton: false,
-        focusConfirm: false,
-        confirmButtonText: '<i class="fa fa-thumbs-up"></i> Ir a Comprar!',
-        confirmButtonAriaLabel: 'Thumbs up, great!',
-    })
 });
