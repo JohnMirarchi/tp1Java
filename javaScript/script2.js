@@ -32,6 +32,11 @@ document.addEventListener('DOMContentLoaded', () => {
             miNodoTitle.classList.add('card-title');
             miNodoTitle.innerText = info.nombre;
 
+            const miNodoImg = document.createElement("img");
+            miNodoImg.classList.add("card-img-top");
+            miNodoImg.classList.add("imagen");
+            miNodoImg.setAttribute("src", info.img);
+
             const miNodoPrecio = document.createElement('p');
             miNodoPrecio.classList.add('card-text');
             miNodoPrecio.innerText = `$${info.precio}`;
@@ -39,11 +44,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const miNodoStock = document.createElement('p');
             miNodoStock.classList.add('card-text');
             miNodoStock.innerText = `Disponibles: ${info.stock}`;
-
-            const miNodoImg = document.createElement("img");
-            miNodoImg.classList.add("card-img-top");
-            miNodoImg.classList.add("imagen");
-            miNodoImg.setAttribute("src", info.img);
 
 
             const miNodoBoton = document.createElement('button');
@@ -55,9 +55,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
             miNodoCardBody.append(miNodoTitle);
+            miNodoCardBody.append(miNodoImg);
             miNodoCardBody.append(miNodoPrecio);
             miNodoCardBody.append(miNodoStock);
-            miNodoCardBody.append(miNodoImg);
             miNodoCardBody.append(miNodoBoton);
             miNodo.append(miNodoCardBody);
             items.append(miNodo);
