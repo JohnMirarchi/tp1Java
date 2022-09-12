@@ -82,7 +82,6 @@ document.addEventListener('DOMContentLoaded', () => {
             icon: 'success',
             title: 'Agregado al Carrito!',
             showConfirmButton: true,
-            timer: 1200,
             confirmButtonText: "Seguir Comprando"
         })
     }
@@ -102,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const numeroUnidadesItem = carrito.reduce((total, itemId) => {
 
-                return itemId === item ? total += 1 : total; //Operador avanzado TERNARIO
+                return itemId === item ? total += 1 : total; 
             }, 0);
 
             const miNodo = document.createElement('li');
@@ -203,15 +202,34 @@ document.addEventListener('DOMContentLoaded', () => {
         value: email
     }) => {
         Swal.fire({
-            title: 'Te enviaremos el Link de pago',
-            input: 'email',
-            inputLabel: 'Ingresa tu email',
-            inputPlaceholder: 'email'
-        })
-        if (email) {
-            Swal.fire(`Finaliza tu compra ingresando a: ${email}`) 
-        }
+            title: 'Login Form',
+            html: `<input type="text" id="login" class="swal2-input" placeholder="Username">
+            <input type="password" id="password" class="swal2-input" placeholder="Password">`,
+            confirmButtonText: 'Sign in',
+            focusConfirm: false,
+            preConfirm: () => {
+              const login = Swal.getPopup().querySelector('#login').value
+              const password = Swal.getPopup().querySelector('#password').value
+              if (!login || !password) {
+                Swal.showValidationMessage(`Please enter login and password`)
+              }
+              return { login: login, password: password }
+            }
+          }).then((result) => {
+            Swal.fire(`
+             Recibiras el link de compra en tu e-mail!
+            `.trim())
+          })
     }
+
+    Toastify({
+
+        text: "Bienvenido a TUENTRADASALES!",
+        
+        duration: 2000
+        
+        }).showToast();
+
 
 
     botonVaciar.addEventListener('click', vaciarCarrito);
