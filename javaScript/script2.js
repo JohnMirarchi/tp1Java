@@ -1,5 +1,30 @@
 document.addEventListener('DOMContentLoaded', () => { 
 
+class Producto{
+    constructor (id, nombre, precio, stock, img){
+        this,id = id
+        this.nombre = nombre
+        this.precio = precio
+        this.stock = stock
+        this.img = img
+    }
+}
+
+function cargarDatos(){
+    fetch("data.json")
+    .then((response)=> response.json())
+    .then((data) => {
+    let listaEntradas = []
+    data.forEach(producto => {
+        listaEntradas.push(new Producto(producto.id,producto.nombre,producto.precio,producto.stock,producto.img,))
+    });
+    renderizarCards(listaEntradas)
+    eventoBusqueda(listaEntradas)
+    })
+}
+
+cargarDatos()
+    
     let carrito = [];
     const items = document.getElementById('items');
     const carritoLiteral = document.getElementById('carrito');
@@ -65,6 +90,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
+ // Funcion de la Search Bar Starts
+
+ function eventoBusqueda (listaEntradas){
+    let searchBar = document.getElementById("input_text")
+    searchBar.addEventListener('keyup', (e) => {
+        const textoBusqueda = e.target.value.toLowerCase();
+        let entradasFiltradas = listaEntradas.filter((entradas) =>{
+            return entradas.nombre.toLowerCase().includes(textoBusqueda)
+        })
+        card_container.innerHTML = ""
+        renderizarCards(entradasFiltradas)
+    })
+}
     
     function agregarProductoAlCarrito(e) {
 
