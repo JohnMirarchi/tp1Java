@@ -88,21 +88,6 @@ cargarDatos()
             items.append(miNodo);
         });
     }
-
-
- // Funcion de la Search Bar Starts
-
- function eventoBusqueda (listaEntradas){
-    let searchBar = document.getElementById("input_text")
-    searchBar.addEventListener('keyup', (e) => {
-        const textoBusqueda = e.target.value.toLowerCase();
-        let entradasFiltradas = listaEntradas.filter((entradas) =>{
-            return entradas.nombre.toLowerCase().includes(textoBusqueda)
-        })
-        card_container.innerHTML = ""
-        renderizarCards(entradasFiltradas)
-    })
-}
     
     function agregarProductoAlCarrito(e) {
 
